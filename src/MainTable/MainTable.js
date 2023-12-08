@@ -84,7 +84,7 @@ function MainTable({ data, filter, reload }) {
                 {tableData.date} {tableData.time}
               </td>
               <td>{tableData.priority}</td>
-              <td>{tableData.fulfillment}</td>
+              <td>{tableData.fulfillment}%</td>
               <td>
                 <img
                   src={editIcon}
