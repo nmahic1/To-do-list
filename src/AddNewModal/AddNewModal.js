@@ -95,11 +95,13 @@ const AddNewModal = ({ addTaskToTable, close, editTableData }) => {
         />
         <Input
           title="Date:"
+          type="date"
           value={date}
           onChange={(event) => setWhenDate(event.target.value)}
         />
         <Input
           title="Time:"
+          type="time"
           value={time}
           onChange={(event) => setWhenTime(event.target.value)}
         />

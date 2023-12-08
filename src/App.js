@@ -31,11 +31,9 @@ export default function MyApp() {
     })
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
         toast.success(data?.message);
       })
       .catch((err) => {
-        //console.log(err.message);
         toast.error(err.message);
       });
   };
