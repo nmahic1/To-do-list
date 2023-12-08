@@ -31,11 +31,11 @@ export default function MyApp() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         toast.success(data?.message);
       })
       .catch((err) => {
-        console.log(err.message);
+        //console.log(err.message);
         toast.error(err.message);
       });
   };
@@ -43,6 +43,7 @@ export default function MyApp() {
   const fetchData = async () => {
     const result = await fetch(process.env.REACT_APP_BACKEND_LINK + "/load");
     result.json().then((json) => {
+      console.log("Fetching all items");
       console.log(json);
       setTableData(json.data);
     });

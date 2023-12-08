@@ -8,23 +8,13 @@ import React from "react";
 import Button from "../Button/Button";
 import toast from "react-hot-toast";
 
-function MainTable({ data, filter, setData, reload }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function MainTable({ data, filter, reload }) {
   console.log(data);
-  const [editTableData, setEditTableData] = useState([]);
+  const [editTableData, setEditTableData] = useState();
   const [deletePromptModal, setDeletePromptModal] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const editTaskToTable = (obj) => {
-    setEditTableData([...editTableData, obj]);
-    closeModal();
+    setEditTableData();
   };
 
   const filteredData = data.filter((tableData) => {
@@ -38,12 +28,6 @@ function MainTable({ data, filter, setData, reload }) {
     return true;
   });
 
-  /* const handleDelete = (index) => {
-    const newData = [...data];
-    newData.splice(index, 1);
-    setData(newData);
-  };*/
-
   const handleDelete = async (index) => {
     await fetch(process.env.REACT_APP_BACKEND_LINK + "/remove/" + index, {
       method: "DELETE",
@@ -51,6 +35,27 @@ function MainTable({ data, filter, setData, reload }) {
     reload();
     setDeletePromptModal(false);
     toast.success("Succesfully Deleted Row!");
+  };
+
+  const handleUpdate = async (updatedData) => {
+    const response = await fetch(
+      process.env.REACT_APP_BACKEND_LINK + "/update/" + editTableData._id,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      }
+    );
+    console.log("handleUpdate");
+
+    console.log(response);
+    if (response.ok) {
+      let data = await response.json();
+      console.log(data);
+
+      reload();
+      setEditTableData();
+    }
   };
 
   return (
@@ -80,7 +85,11 @@ function MainTable({ data, filter, setData, reload }) {
               <td>{tableData.priority}</td>
               <td>{tableData.fulfillment}</td>
               <td>
-                <img src={editIcon} alt="Edit icon" onClick={openModal} />
+                <img
+                  src={editIcon}
+                  alt="Edit icon"
+                  onClick={() => setEditTableData(tableData)}
+                />
               </td>
               <td>
                 <img
@@ -112,9 +121,13 @@ function MainTable({ data, filter, setData, reload }) {
           </Button>
         </Modal>
       )}
-      {isModalOpen && (
+      {editTableData && (
         <Modal close={closeModal}>
-          <AddNewModal addTaskToTable={editTaskToTable} close={closeModal} />
+          <AddNewModal
+            editTableData={editTableData}
+            close={closeModal}
+            addTaskToTable={handleUpdate}
+          />
         </Modal>
       )}
     </table>

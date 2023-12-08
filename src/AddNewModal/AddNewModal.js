@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import "./AddNewModal.css";
 
-const AddNewModal = ({ addTaskToTable, close }) => {
+const AddNewModal = ({ addTaskToTable, close, editTableData }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -24,6 +24,18 @@ const AddNewModal = ({ addTaskToTable, close }) => {
   };
 
   useEffect(() => {
+    if (editTableData) {
+      setName(editTableData.name);
+      setDescription(editTableData.description);
+      setCategory(editTableData.category);
+      setWhenDate(editTableData.date);
+      setWhenTime(editTableData.time);
+      setPriority(editTableData.priority);
+      setFulfillment(editTableData.fulfillment);
+    }
+  }, []);
+
+  useEffect(() => {
     console.log(name);
     if (
       name !== "" &&
@@ -41,7 +53,7 @@ const AddNewModal = ({ addTaskToTable, close }) => {
   }, [name, description, category, date, time, priority, fulfillment]);
 
   const handleSave = () => {
-    const obj = {
+    let obj = {
       name: name,
       description: description,
       category: category,
@@ -50,9 +62,9 @@ const AddNewModal = ({ addTaskToTable, close }) => {
       priority: priority,
       fulfillment: fulfillment,
     };
-
     addTaskToTable(obj);
     clearState();
+    close();
   };
 
   return (
