@@ -1,0 +1,42 @@
+.modal-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container .back-drop {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(200, 200, 200, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal-container .content {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  position: relative;
+}
+
+.modal-container .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.modal-container .close:hover {
+  background-color: lightgray;
+  opacity: 0.5;
+}

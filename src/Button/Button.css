@@ -1,0 +1,26 @@
+.button {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 1rem 2rem;
+  min-width: 125px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-small {
+}
+
+.transparent-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 40px;
+  border-radius: 20px;
+  height: 600px;
+  width: 900px;
+  margin: 50px auto;
+}
+
+.selected {
+  background-color: rgb(96, 96, 239);
+  color: white;
+}

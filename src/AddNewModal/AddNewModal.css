@@ -1,0 +1,11 @@
+.add-new-item-wrapper {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-new-item-wrapper input,
+.add-new-item-wrapper select {
+  width: 100%;
+}
