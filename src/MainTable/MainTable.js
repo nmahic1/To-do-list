@@ -55,6 +55,7 @@ function MainTable({ data, filter, reload }) {
 
       reload();
       setEditTableData();
+      toast.success("Succesfully Edited Row!");
     }
   };
 
